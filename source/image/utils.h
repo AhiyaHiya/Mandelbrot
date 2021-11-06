@@ -5,9 +5,12 @@
 
 #pragma once
 
+#include "image/types.h"
+
+#include <filesystem>
 #include <vector>
 
-namespace jaimerios
+namespace hera
 {
 namespace position
 {
@@ -16,7 +19,7 @@ namespace position
  Will return memory offset within 1d_vec for x,y coordinate and desired channel.
  */
 template <const uint32_t channel_count>
-auto offset_in_interleaved_1d_vec(const uint32_t width, const uint32_t x, const uint32_t y, const uint32_t channel) -> size_t
+auto offset_in_interleaved_1d_vec(const pixels_wide_t width, const point_t x, const point_t y, const uint32_t channel) -> size_t
 {
   const auto offset = (y * width + x) * channel_count + channel;
   return offset;
@@ -26,16 +29,12 @@ auto offset_in_interleaved_1d_vec(const uint32_t width, const uint32_t x, const 
  For use with 1d_vec that is storing pixels in planar format: e.g. rrrgggbbb
  Will return memory offset within 1d_vec for x,y coordinate and desired channel.
  */
-template <const uint32_t width, const uint32_t height>
-auto offset_in_planar_1d_vec(const uint32_t x, const uint32_t y, const uint32_t channel) -> size_t
+template <const pixels_wide_t width, const pixels_wide_t height>
+auto offset_in_planar_1d_vec(const point_t x, const point_t y, const uint32_t channel) -> size_t
 {
   const auto offset = static_cast<size_t>((channel * (width * height)) + (y * width + x));
   return offset;
 }
 } // namespace position
 
-// compilers love 1d vec's for vectorization
-template <typename T>
-using vec_1d = std::vector<T>;
-
-} // namespace jaimerios
+} // namespace hera

@@ -3,33 +3,48 @@
 //  Copyright © 2021 jaimerios.com. All rights reserved.
 //
 
-#include <future>
 #include <iostream>
-#include <memory>
 
+#include "image/types.h"
 #include "mandelbrot/mandelbrot.h"
 
-////////////////////////////////////////////////////////////////
-void exercise_mandelbrot()
-{
-  printf("Function: %s\tLine: %d\n", __FUNCTION__, __LINE__);
-
-  const auto width  = 1024.0f * 1.5f;
-  const auto height = 768.0f * 1.5f;
-
-  const auto x_min = -2.0;
-  const auto x_max = +0.5;
-  const auto y_max = +1.0;
-  const auto y_min = -1.0;
-
-  auto pixels = jaimerios::create_vec_1d_filled_with_mandelbrot_pixels<uint8_t>(x_max, x_min, y_max, y_min, width, height);
-  (void)pixels;
-}
+#include "CImg.h"
+using namespace cimg_library;
 
 ////////////////////////////////////////////////////////////////
+//
 int main(int, char **)
 {
-  std::cout << "Hello to shared_ptr examples\n";
+    ////////////////////////////////////////////////////////////////
+    // Create a mandelbrot image
+    constexpr auto width  = pixels_wide_t(1536);
+    constexpr auto height = pixels_wide_t(1152);
 
-  exercise_mandelbrot();
+    // Dimensions we need for image creation
+    constexpr auto x_min = -2.0;
+    constexpr auto x_max = +0.5;
+    constexpr auto y_max = +1.0;
+    constexpr auto y_min = -1.0;
+
+    auto rgba_image = hera::create_mandelbrot_image<uint8_t>(x_max, x_min, y_max, y_min, width, height);
+
+    ////////////////////////////////////////////////////////////////
+    // Now use CImg for displaying the rendered image
+    constexpr auto channel_count = 4u;
+    CImg<uint8_t>  image(width, height, 1, channel_count, 0);
+
+    // Macro for looping over image
+    cimg_forXYC(image, x, y, c)
+    {
+        const auto offset = hera::position::offset_in_interleaved_1d_vec<channel_count>(width, x, y, c);
+        image(x, y, c)    = rgba_image[offset];
+    }
+
+    // Display mechanism
+    auto main_disp = CImgDisplay(image, "Image");
+    while (!main_disp.is_closed())
+    {
+        main_disp.wait();
+    }
+    return 0;
 }
