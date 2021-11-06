@@ -1,16 +1,54 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.19.0)
+
 project(mandelbrot VERSION 0.1.0)
 
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+# C17 and C++20
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
-include(CTest)
-enable_testing()
+# Folders for IDEs that support it
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-add_executable(mandelbrot source/cli/main.cpp)
+# We need to specify these types since we are supporting multi-config IDEs like Xcode and Visual Studio
+set(CMAKE_CONFIGURATION_TYPES "Debug" "Release")
+
+# Conan section
+include(ConanHelper.cmake)
+
+# CImg package ( http://cimg.eu/reference/tutorial.html )
+conan_cmake_configure(
+    REQUIRES
+      cimg/2.9.9
+    GENERATORS
+        cmake_find_package_multi
+)
+
+# Each config has to be set up for each package, so we'll loop through each (Debug, Release)
+foreach(type ${CMAKE_CONFIGURATION_TYPES})
+    message(STATUS "Configuring build type ${type}")
+    conan_cmake_autodetect(settings BUILD_TYPE ${type})
+    conan_cmake_install(PATH_OR_REFERENCE .
+                        BUILD missing
+                        REMOTE conancenter
+                        SETTINGS ${settings})
+endforeach()
+
+# Now call find_package
+find_package(CImg CONFIG)
+
+set(header_files
+  "source/image/types.h"
+  "source/image/utils.h"
+  "source/mandelbrot/mandelbrot.h"
+)
+
+#####################################################
+# Main app
+add_executable(mandelbrot "source/cli/main.cpp" "${header_files}")
 
 include_directories(source)
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+target_link_libraries(mandelbrot
+    PRIVATE
+        CImg::CImg
+)
