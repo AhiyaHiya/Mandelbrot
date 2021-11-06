@@ -1,4 +1,8 @@
 # Mandelbrot
-C++ implementation of Mandelbrot formula, with macOS GUI app.
+C++ implementation of the Mandelbrot formula.
 
-This is an acedemic exercise. This code is also useful for where you need to generate an image in a test app.
+This project uses CMake for describing how to build the source code.
+
+This is an academic exercise.
+
+This code is useful for where you need to generate an image in a test app.
