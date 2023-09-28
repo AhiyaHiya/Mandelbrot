@@ -8,6 +8,7 @@
 #include <vector>
 
 using pixels_wide_t = size_t;
+using pixels_high_t = size_t;
 using point_t = uint32_t;
 
 // compilers love 1d vec's for vectorization

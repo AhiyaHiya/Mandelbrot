@@ -8,7 +8,6 @@
 #include "image/types.h"
 
 #include <filesystem>
-#include <vector>
 
 namespace hera
 {
@@ -32,7 +31,7 @@ auto offset_in_interleaved_1d_vec(const pixels_wide_t width, const point_t x, co
 template <const pixels_wide_t width, const pixels_wide_t height>
 auto offset_in_planar_1d_vec(const point_t x, const point_t y, const uint32_t channel) -> size_t
 {
-  const auto offset = static_cast<size_t>((channel * (width * height)) + (y * width + x));
+  const auto offset = (channel * (width * height)) + (y * width + x);
   return offset;
 }
 } // namespace position

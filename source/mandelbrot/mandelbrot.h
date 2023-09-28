@@ -5,11 +5,11 @@
 
 #pragma once
 
+#include "image/utils.h"
+
 #include <cmath>
 #include <limits>
 #include <stdint.h>
-
-#include "image/utils.h"
 
 namespace hera
 {
@@ -79,10 +79,8 @@ class mandelbrot
             const auto alpha = static_cast<T>(m_max_channel_value);
             return std::make_tuple(red, green, blue, alpha);
         }
-        else
-        {
-            return std::make_tuple(0, 0, 0, 0);
-        }
+
+        return std::make_tuple(0, 0, 0, 0);
     }
 
   private:
