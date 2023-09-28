@@ -18,7 +18,7 @@ include(ConanHelper.cmake)
 # CImg package ( http://cimg.eu/reference/tutorial.html )
 conan_cmake_configure(
     REQUIRES
-      cimg/2.9.9
+      cimg/3.2.6
     GENERATORS
         cmake_find_package_multi
 )
