@@ -52,3 +52,10 @@ target_link_libraries(mandelbrot
     PRIVATE
         CImg::CImg
 )
+
+if(MSVC)
+target_compile_options(mandelbrot
+    PRIVATE
+        "/EHsc"
+)
+endif()
