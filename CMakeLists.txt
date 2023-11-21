@@ -12,11 +12,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # We need to specify these types since we are supporting multi-config IDEs like Xcode and Visual Studio
 set(CMAKE_CONFIGURATION_TYPES "Debug" "Release")
 
-# Add the CMake folder to the search path
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake")
-
-# Setup packages
-include(ConanHelper)
-include(ConanPackageSetup)
+find_package(CImg CONFIG)
+find_package(GTest CONFIG)
 
 add_subdirectory(source)
