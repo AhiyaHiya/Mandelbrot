@@ -1,0 +1,9 @@
+[requires]
+    cimg/3.3.0
+
+[tool_requires]
+    gtest/1.14.0
+
+[generators]
+    CMakeDeps
+    CMakeToolchain
