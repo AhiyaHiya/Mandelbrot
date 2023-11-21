@@ -3,6 +3,7 @@
 conan_cmake_configure(
     REQUIRES
       cimg/3.3.0
+      gtest/1.14.0
     GENERATORS
       cmake_find_package_multi
 )
@@ -19,3 +20,4 @@ endforeach()
 
 # Now call find_package
 find_package(CImg CONFIG)
+find_package(GTest CONFIG)
