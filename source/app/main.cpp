@@ -26,7 +26,7 @@ auto create_mandelbrot(const auto width, const auto height)
 auto convert_to_cimg(const auto width, const auto height, const auto rgba_image)
 {
     constexpr auto channel_count = 4u;
-    CImg<uint8_t>  image(width, height, 1, channel_count, 0);
+    auto image = CImg<uint8_t>{width, height, 1, channel_count, 0};
 
     // Macro for looping over image
     cimg_forXYC(image, x, y, c)
@@ -41,8 +41,8 @@ auto convert_to_cimg(const auto width, const auto height, const auto rgba_image)
 int main(int, char **)
 {
     // Create a mandelbrot image
-    constexpr auto width  = pixels_wide_t{1536};
-    constexpr auto height = pixels_high_t{1152};
+    constexpr auto width      = pixels_wide_t{1536};
+    constexpr auto height     = pixels_high_t{1152};
     const auto     rgba_image = create_mandelbrot(width, height);
 
     // Create a CImg
