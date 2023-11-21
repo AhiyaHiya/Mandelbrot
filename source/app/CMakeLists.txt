@@ -8,7 +8,7 @@ include_directories(source)
 target_link_libraries(mandelbrot_app
     PRIVATE
         mandelbrot_headers
-        CImg::CImg
+        cimg::cimg
 )
 
 if(MSVC)
