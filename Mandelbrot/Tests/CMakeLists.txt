@@ -6,6 +6,6 @@ add_executable(MandelbrotTests MandelbrotTests.cpp)
 
 target_link_libraries(MandelbrotTests
     PRIVATE
-        gtest
-        gtest_main
+        GTest::gtest
+        GTest::gtest_main
 )

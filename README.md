@@ -31,7 +31,7 @@ conan install . --output-folder=build --build=missing
 **For Windows**
 
 ```sh
-cmake -S . -B build -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake
+cmake --preset conan-default
 cmake --build ./build --config Release
 ```
 

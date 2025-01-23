@@ -1,5 +1,7 @@
 
-add_library(MandelbrotLib STATIC Mandelbrot.cpp)
+add_library(MandelbrotLib STATIC
+    "Source/Mandelbrot.cpp"
+)
 
 target_include_directories(MandelbrotLib
     PUBLIC
