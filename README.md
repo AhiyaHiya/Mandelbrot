@@ -13,6 +13,16 @@ This project uses conan 2.0 for package management ( https://docs.conan.io/2/ )
 You can use Python3 (`python3 -m pip3`) to install conan.
 
 ### Steps
+
+**Set up Python virtual environment**
+
+**For Windows**
+```sh
+"C:\Program Files\Python311\python.exe" -m venv venv_1
+venv_1\Scripts\activate.bat
+pip install -r requirements.txt
+```
+
 **Conan Installation:**
 ```sh
 conan install . --output-folder=build --build=missing
