@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19.0)
 
-project(mandelbrot VERSION 0.1.0)
+project(Mandelbrot VERSION 0.2.0)
 
 # C17 and C++20
 set(CMAKE_C_STANDARD 17)
@@ -12,7 +12,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # We need to specify these types since we are supporting multi-config IDEs like Xcode and Visual Studio
 set(CMAKE_CONFIGURATION_TYPES "Debug" "Release")
 
-find_package(CImg REQUIRED)
+#find_package(CImg REQUIRED)
 find_package(GTest REQUIRED)
 
-add_subdirectory(source)
+add_subdirectory(Mandelbrot)
