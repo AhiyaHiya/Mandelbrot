@@ -8,7 +8,7 @@ TEST(MandelbrotTests, GetASmallMandelbrotImage)
 {
     constexpr auto width = 240;
     constexpr auto height = 180;
-    const auto rgbaImage = Mandelbrot::GetMandelbrotImage(width, height);
+    const auto rgbaImage = Mandelbrot::CreateMandelbrotImage(width, height);
 
     ASSERT_NE(rgbaImage.size(), 0);
 }
