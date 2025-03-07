@@ -16,6 +16,13 @@ You can use Python3 (`python3 -m pip3`) to install conan.
 
 **Set up Python virtual environment**
 
+**For Linux and macOS**
+```sh
+python3 -m venv venv_1
+source venv_1/bin/activate
+pip install -r requirements.txt
+```
+
 **For Windows**
 ```sh
 "C:\Program Files\Python311\python.exe" -m venv venv_1
@@ -24,8 +31,17 @@ pip install -r requirements.txt
 ```
 
 **Conan Installation:**
+
+Linux
+
 ```sh
 conan install . --output-folder=build --build=missing
+```
+
+macOS
+
+```sh
+conan install ./conan/conanfile.txt --output-folder=build --build=missing --profile:host=conan/macos.txt --profile:build=default
 ```
 
 **For Windows**
