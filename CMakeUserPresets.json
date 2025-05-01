@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "configurePresets": [
+      {
+        "name": "default",
+        "inherits": "vcpkg_macOS",
+        "environment": {
+          "VCPKG_ROOT": "/Users/jaimerios/Development/GitHub/vcpkg"
+        }
+      }
+    ]
+  }
