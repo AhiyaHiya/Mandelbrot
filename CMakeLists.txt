@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.19.0)
+cmake_minimum_required(VERSION 3.24.0)
 
-project(mandelbrot VERSION 0.1.0)
+project(mandelbrot VERSION 0.2.0)
 
 # C17 and C++20
 set(CMAKE_C_STANDARD 17)
@@ -15,4 +15,7 @@ set(CMAKE_CONFIGURATION_TYPES "Debug" "Release")
 find_package(CImg REQUIRED)
 find_package(GTest REQUIRED)
 
-add_subdirectory(source)
+add_library(mandelbrot STATIC
+    "Include/MandelbrotSet.h"
+    "Source/MandelbrotSet.cpp"
+)
