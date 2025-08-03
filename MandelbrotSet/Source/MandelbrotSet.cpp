@@ -1,4 +1,6 @@
 
+#include "MandelbrotSet.hpp"
+
 auto MandelbrotSet::PixelAtCoordinate(const double scaled_x, const double scaled_y) -> std::tuple<red_t, green_t, blue_t, alpha_t>
 {
     double x0 = 0.0;
@@ -47,7 +49,7 @@ auto MandelbrotSet::PixelAtIteration(const uint32_t iteration) -> std::tuple<red
 }
 
 auto CreateMandelbrotImage(const double x_max, const double x_min, const double y_max, const double y_min,
-                             const size_t width, const size_t height) -> vec_1d<std::uint32_t>
+                             const size_t width, const size_t height) -> std::vector<std::uint32_t>
 {
     auto mandelbrotSet = MandelbrotSet();
 
@@ -58,12 +60,12 @@ auto CreateMandelbrotImage(const double x_max, const double x_min, const double 
     {
         for (auto x = 0; x < width; ++x)
         {
-            const auto scaled_x = mandelbrotSet.scale_coordinate(static_cast<double>(x), x_min, x_max, width);
-            const auto scaled_y = mandelbrotSet.scale_coordinate(static_cast<double>(y), y_min, y_max, height);
+            const auto scaled_x = mandelbrotSet.ScaleCoordinate(static_cast<double>(x), x_min, x_max, width);
+            const auto scaled_y = mandelbrotSet.ScaleCoordinate(static_cast<double>(y), y_min, y_max, height);
 
             const auto [red, green, blue, alpha] = mandelbrotSet.PixelAtCoordinate(scaled_x, scaled_y);
 
-            const auto offset = position::offset_in_interleaved_1d_vec(4, width, x, y);
+            const auto offset = (y * width + x) * channelCount;
             image[offset]     = static_cast<std::uint32_t>(red);
             image[offset + 1] = static_cast<std::uint32_t>(green);
             image[offset + 2] = static_cast<std::uint32_t>(blue);
