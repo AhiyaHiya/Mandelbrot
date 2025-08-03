@@ -15,7 +15,5 @@ set(CMAKE_CONFIGURATION_TYPES "Debug" "Release")
 find_package(CImg REQUIRED)
 find_package(GTest REQUIRED)
 
-add_library(mandelbrot STATIC
-    "Include/MandelbrotSet.h"
-    "Source/MandelbrotSet.cpp"
-)
+add_subdirectory(MandelbrotSet)
+add_subdirectory(mandelbrot_cli)
