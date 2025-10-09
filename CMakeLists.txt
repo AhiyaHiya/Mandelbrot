@@ -38,7 +38,4 @@ find_package(GTest CONFIG REQUIRED)
 
 enable_testing()
 
-add_library(mandelbrot STATIC
-    "Include/MandelbrotSet.hpp"
-    "Source/MandelbrotSet.cpp"
-)
+add_subdirectory(MandelbrotSet)
