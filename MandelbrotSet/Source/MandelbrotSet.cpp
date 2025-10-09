@@ -1,4 +1,6 @@
 
+#include "MandelbrotSet.hpp"
+
 auto MandelbrotSet::PixelAtCoordinate(const double scaled_x, const double scaled_y) -> std::tuple<red_t, green_t, blue_t, alpha_t>
 {
     double x0 = 0.0;

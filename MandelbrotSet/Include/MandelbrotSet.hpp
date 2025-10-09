@@ -1,8 +1,13 @@
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
 #include <limits>
 #include <tuple>
+#include <vector>
+
+template <typename T>
+using vec_1d = std::vector<T>;
 
 class MandelbrotSet
 {
