@@ -33,10 +33,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # We need to specify these types since we are supporting multi-config IDEs like Xcode and Visual Studio
 set(CMAKE_CONFIGURATION_TYPES "Debug" "Release")
 
-find_package(CImg REQUIRED)
-find_package(GTest REQUIRED)
+find_package(CImg CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
+
+enable_testing()
 
 add_library(mandelbrot STATIC
-    "Include/MandelbrotSet.h"
+    "Include/MandelbrotSet.hpp"
     "Source/MandelbrotSet.cpp"
 )
