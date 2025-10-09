@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstdint>
+#include <limits>
+#include <tuple>
+
 class MandelbrotSet
 {
     using red_t = std::int32_t;
