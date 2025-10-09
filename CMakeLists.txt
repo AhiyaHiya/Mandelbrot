@@ -39,3 +39,4 @@ find_package(GTest CONFIG REQUIRED)
 enable_testing()
 
 add_subdirectory(MandelbrotSet)
+add_subdirectory(CLI)
