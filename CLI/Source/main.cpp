@@ -3,20 +3,24 @@
 
 #include <CImg.h>
 
+namespace 
+{
+constexpr auto x_min = -2.0;
+constexpr auto x_max = +0.5;
+constexpr auto y_max = +1.0;
+constexpr auto y_min = -1.0;
+} // namespace
+
 int main(int argc, char* argv[])
 {
     if (argc != 7)
     {
-        std::printf("Usage: %s <x_max> <x_min> <y_max> <y_min> <width> <height>\n", argv[0]);
+        std::printf("Usage: %s <width> <height>\n", argv[0]);
         return 1;
     }
 
-    const auto x_max = std::atof(argv[1]);
-    const auto x_min = std::atof(argv[2]);
-    const auto y_max = std::atof(argv[3]);
-    const auto y_min = std::atof(argv[4]);
-    const auto width = static_cast<size_t>(std::atoi(argv[5]));
-    const auto height = static_cast<size_t>(std::atoi(argv[6]));
+    const auto width = static_cast<size_t>(std::atoi(argv[1]));
+    const auto height = static_cast<size_t>(std::atoi(argv[2]));
 
     const auto image_data = CreateMandelbrotImage(x_max, x_min, y_max, y_min, width, height);
 
