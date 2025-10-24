@@ -73,11 +73,16 @@ auto CreateMandelbrotImage(const double x_max, const double x_min, const double 
             const auto scaled_y = scale_coordinate(static_cast<double>(y), y_min, y_max, height);
 
             const auto [red, green, blue, alpha] = mandelbrotSet.PixelAtCoordinate(scaled_x, scaled_y);
-            const auto offset = position::offset_in_interleaved_1d_vec<channelCount>(width, x, y, 0);
-            image[offset]     = static_cast<std::uint32_t>(red);
-            image[offset + 1] = static_cast<std::uint32_t>(green);
-            image[offset + 2] = static_cast<std::uint32_t>(blue);
-            image[offset + 3] = static_cast<std::uint32_t>(alpha);
+
+            const auto r_pos = position::offset_in_interleaved_1d_vec<channelCount>(width, x, y, 0);
+            const auto g_pos = position::offset_in_interleaved_1d_vec<channelCount>(width, x, y, 1);
+            const auto b_pos = position::offset_in_interleaved_1d_vec<channelCount>(width, x, y, 2);
+            const auto a_pos = position::offset_in_interleaved_1d_vec<channelCount>(width, x, y, 3);
+
+            image[r_pos] = static_cast<std::uint32_t>(red);
+            image[g_pos] = static_cast<std::uint32_t>(green);
+            image[b_pos] = static_cast<std::uint32_t>(blue);
+            image[a_pos] = static_cast<std::uint32_t>(alpha);
         }
     }
 
