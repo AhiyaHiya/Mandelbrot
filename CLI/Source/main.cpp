@@ -14,7 +14,7 @@ constexpr auto y_min = -1.0;
 
 int main(int argc, char* argv[])
 {
-    if (argc != 7)
+    if (argc != 3)
     {
         std::printf("Usage: %s <width> <height>\n", argv[0]);
         return 1;
