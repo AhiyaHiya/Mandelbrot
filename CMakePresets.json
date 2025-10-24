@@ -2,28 +2,100 @@
     "version": 2,
     "configurePresets": [
       {
-        "name": "vcpkg_linux",
+        "name": "vcpkg_linux_debug",
         "generator": "Unix Makefiles",
-        "binaryDir": "${sourceDir}/build",
+        "binaryDir": "${sourceDir}/build/debug",
         "cacheVariables": {
-          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake"
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_CXX_FLAGS_DEBUG": "-g -O0 -Wall -Wextra"
         }
       },
       {
-        "name": "vcpkg_macOS",
+        "name": "vcpkg_linux_release",
+        "generator": "Unix Makefiles",
+        "binaryDir": "${sourceDir}/build/release",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG"
+        }
+      },
+      {
+        "name": "vcpkg_macOS_debug",
         "generator": "Xcode",
-        "binaryDir": "${sourceDir}/build",
+        "binaryDir": "${sourceDir}/build/debug",
         "cacheVariables": {
-          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake"
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_CXX_FLAGS_DEBUG": "-g -O0 -Wall -Wextra",
+          "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64"
         }
       },
       {
-        "name": "vcpkg_windows",
-        "generator": "Visual Studio 17 2022",
-        "binaryDir": "${sourceDir}/build",
+        "name": "vcpkg_macOS_release",
+        "generator": "Xcode",
+        "binaryDir": "${sourceDir}/build/release",
         "cacheVariables": {
-          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake"
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+          "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64"
         }
+      },
+      {
+        "name": "vcpkg_windows_debug",
+        "generator": "Visual Studio 17 2022",
+        "binaryDir": "${sourceDir}/build/debug",
+        "architecture": "x64",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_CXX_FLAGS_DEBUG": "/Zi /Ob0 /Od /RTC1 /MDd /W4"
+        }
+      },
+      {
+        "name": "vcpkg_windows_release",
+        "generator": "Visual Studio 17 2022",
+        "binaryDir": "${sourceDir}/build/release",
+        "architecture": "x64",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_CXX_FLAGS_RELEASE": "/O2 /Ob2 /DNDEBUG /MD"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "debug",
+        "configurePreset": "vcpkg_linux_debug",
+        "configuration": "Debug"
+      },
+      {
+        "name": "release",
+        "configurePreset": "vcpkg_linux_release",
+        "configuration": "Release"
+      },
+      {
+        "name": "debug-macos",
+        "configurePreset": "vcpkg_macOS_debug",
+        "configuration": "Debug"
+      },
+      {
+        "name": "release-macos",
+        "configurePreset": "vcpkg_macOS_release",
+        "configuration": "Release"
+      },
+      {
+        "name": "debug-windows",
+        "configurePreset": "vcpkg_windows_debug",
+        "configuration": "Debug"
+      },
+      {
+        "name": "release-windows",
+        "configurePreset": "vcpkg_windows_release",
+        "configuration": "Release"
       }
     ]
   }

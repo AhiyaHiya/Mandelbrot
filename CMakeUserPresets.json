@@ -2,11 +2,30 @@
     "version": 2,
     "configurePresets": [
       {
-        "name": "default",
-        "inherits": "vcpkg_macOS",
+        "name": "default-debug",
+        "inherits": "vcpkg_linux_debug",
         "environment": {
-          "VCPKG_ROOT": "/Users/jaimerios/Development/GitHub/vcpkg"
+          "VCPKG_ROOT": "${sourceDir}/ThirdParty/vcpkg"
         }
+      },
+      {
+        "name": "default-release",
+        "inherits": "vcpkg_linux_release",
+        "environment": {
+          "VCPKG_ROOT": "${sourceDir}/ThirdParty/vcpkg"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "default-debug",
+        "configurePreset": "default-debug",
+        "configuration": "Debug"
+      },
+      {
+        "name": "default-release",
+        "configurePreset": "default-release",
+        "configuration": "Release"
       }
     ]
   }
