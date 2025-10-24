@@ -40,3 +40,4 @@ enable_testing()
 
 add_subdirectory(MandelbrotSet)
 add_subdirectory(CLI)
+add_subdirectory(Tests)
